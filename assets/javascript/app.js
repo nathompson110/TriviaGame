@@ -9,6 +9,14 @@ var countW = 0;
 var timer = 30;
 
 var random =[0,1,2,3,4];
+function ranNum(choice, answers) {
+		document.getElementById("question").innerHTML = answers[0];
+	    var x = Math.floor(Math.random()*(random.length-1)+1);
+	    var y = random[x];
+		document.getElementById(choice).innerHTML= answers[y];
+	    random.splice(random.indexOf(y),1);
+	    return random;
+	    };
 
 $(document).ready(function(){
  	
@@ -32,26 +40,24 @@ $(document).ready(function(){
 
 				document.getElementById('timer').innerHTML =timer;
 			}, 1000);
-			newQuestion(q1);
+
+			populate(q1);
+			areYouRight(q1);
+
 	}
 	}
 timePlease();
+populate
+
 
 //inserts question and shuffles button answer choices randomly 
-	function ranNum(choice, answers) {
-		document.getElementById("question").innerHTML = answers[0];
-	    var x = Math.floor(Math.random()*(random.length-1)+1);
-	    var y = random[x];
-		document.getElementById(choice).innerHTML= answers[y];
-	    random.splice(random.indexOf(y),1);
-	    return random;
-	    };
+	
 	function populate (quest){ 
-	random =[0,1,2,3,4];  
 	ranNum("firstChoice", quest);
 	ranNum("secondChoice",quest);
  	ranNum("thirdChoice",quest);
 	ranNum("fourthChoice",quest);
+	random =[0,1,2,3,4];
 };
 // populate(q2);
 //determines whether the correct answer was chosen and adds to the appr count
@@ -61,8 +67,7 @@ function rightAnswer (choice, answers) {
  		countR += 1;
    		$("#rightCount").html(countR);
    		alert("Nice!");
-   		timer = 30;
-   	
+   		timer = 30; 	
 
    	} else{
    	countW += 1;
@@ -77,7 +82,11 @@ function rightAnswer (choice, answers) {
 	newQuestion(q3)}
 	else if(countW+countR===3) {
 	newQuestion(q4)};
+    
+
+
 });
+	
 };
 
 
