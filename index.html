@@ -9,33 +9,38 @@
  <!--  <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css"> -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="assets/javascript/app.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Trivia Game</title>
+	<title>Trivia Game</title> 
 </head>
 <body>
 
-	<div>
-	<button id ="start" class="btn">START</button>
+	<div id="popup" class="container-fluid">
+	<header>TRIVIA</header>
+	<button id="tryAgain" class="btn-block">Restart?</button>
+	<button id ="start" class="btn-block">START</button>
+	
+	<h1><span id="textAnswer"></span> </h1>
 
+	
+	</div>
+	
+
+	
+
+	<div id="triviaStuff">
+		<h1> Trivia Question:<span id="question"></span></h1>
+	<button class="btn-primary" value="0"><span id="firstChoice"></span></button>
+	<button class="btn-primary" value="0"><span id="secondChoice"></span> </button>
+	<button class="btn-primary" value="0"><span id="thirdChoice"></span> </button>
+	<button class="btn-primary" value="0"><span id="fourthChoice"></span> </button>
 	</div>
 
-	<div>
-
-	<h1> Trivia Question:<span id=question></span></h1>
-
-	</div>
-
-	<div>
-	<button class="btn"><span id="firstChoice"></span></button>
-	<button class="btn"><span id="secondChoice"></span> </button>
-	<button class="btn"><span id="thirdChoice"></span> </button>
-	<button class="btn"><span id="fourthChoice"></span> </button>
-	</div>
-
-	<div>
-	<h2> Number Wrong = <span id=wrongCount></span></h2>
-	<h2> Number Right = <span id=rightCount></span></h2>
-	<h2> Timer : <span id=timer></span></h2>
+	<div id="timerBox">
+	<h2> Number Wrong = <span id="wrongCount"></span></h2>
+	<h2> Number Right = <span id="rightCount"></span></h2>
+	<h2> Timer : <span id="timer"></span></h2>
+	
 	</div>
 
 </body>

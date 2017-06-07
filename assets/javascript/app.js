@@ -4,104 +4,112 @@ var q2=["What year was \'Snow White and the Seven Dwarfs\' released","1938","192
 var q3=["What is the name of Aladdin\'s pet monkey?","Abu","Baloo","Raja","Iago"];
 var q4=["According the song \'Be Our Guest\', what must Belle tie?","napkin","tie","scarf","her shoes"];
 
-var countR = 0;
-var countW = 0;
-var timer = 30;
-
+var countR;
+var countW;
+var timer;
+var intervalId;
 var random =[0,1,2,3,4];
-function ranNum(choice, answers) {
-		document.getElementById("question").innerHTML = answers[0];
-	    var x = Math.floor(Math.random()*(random.length-1)+1);
-	    var y = random[x];
-		document.getElementById(choice).innerHTML= answers[y];
-	    random.splice(random.indexOf(y),1);
-	    return random;
-	    };
+var correctAns;
+var clickedAns;
+var myAlert;
+function myStart (){
+	$("#start").click(function(){
+
+		countR = 0;
+		countW = 0;
+		timer = 15;
+		$("#popup").hide();
+		$("#start").hide();
+		$("#wrongCount").html(countW);
+		$("#rightCount").html(countR);
+		$("#timer").html(timer);
+		myTimer();
+		populate(q1);
+		$("#start").html("Play Again?")
+		
+
+	});
+};
+
+function myTimer() {intervalId = setInterval(function () {
+		timer-=1;
+		$("#timer").html(timer);
+		if (timer===-1) {
+			countW++;
+			timer = 17;
+			$("#wrongCount").html(countW);		
+			$("#textAnswer").html("Time's up! The right answer is " + correctAns)
+   			$("#popup").show();
+   			setTimeout(function(){$("#popup").hide(); },2000);
+   			nextQuestion();
+   		};
+   		}, 1000);
+	};
+ //rewrite in loop  	
+ function nextQuestion(){	if(countW+countR===1)
+	{populate(q2)}
+	else if(countW+countR===2) {
+	populate(q3)}
+	else if(countW+countR===3) {
+	populate(q4)}
+	else if(countW+countR===4){
+		stopTimer();
+		$("#start").show();
+		var total = (countR+countW);
+		setTimeout(function(){ $("#textAnswer").html("Game Over! Number Correct: " + countR + " out of " + total);
+   		
+   		$("#popup").show(); }, 2000);
+	};	
+	};	
+function myAlertFunction (innerhtmlmessage){
+   		$("#textAnswer").html(innerhtmlmessage)
+   		$("#popup").show();
+   		setTimeout(function(){$("#popup").hide(); },2000);
+}			
+
+function stopTimer(){clearInterval(intervalId);}
+
+function ranNum(choice, varArray) {
+	var x = Math.floor(Math.random()*(random.length-1)+1);
+	var y = random[x];
+	$(choice).html(varArray[y])
+	random.splice(random.indexOf(y),1);
+	correctAns = varArray[1];
+	return random;
+	};
+
+	   
+function populate (varArray){ 
+	$("#question").html(varArray[0]);	
+	ranNum("#firstChoice", varArray);
+	ranNum("#secondChoice",varArray);
+	ranNum("#thirdChoice",varArray);
+	ranNum("#fourthChoice",varArray);
+	random =[0,1,2,3,4]
+};
+function uRight (){		 
+ $(".btn-primary").click(function(){
+ 	timer = 33; 
+ 	clickedAns = $(this).html()
+ 	if (clickedAns.indexOf(correctAns)>-1){
+ 		countR++;
+ 		$("#rightCount").html(countR);
+ 		myAlertFunction("Great Job!")
+ 	} else {
+ 		countW++;
+ 		$("#wrongCount").html(countW);
+ 		myAlertFunction("UH OH! The right answer is " + correctAns)  		
+ 	};
+ 	nextQuestion()
+    	
+	});
+};
 
 $(document).ready(function(){
- 	
- 	document.getElementById("wrongCount").innerHTML= countW;
- 	document.getElementById("rightCount").innerHTML= countR;
- 	document.getElementById("timer").innerHTML= timer;
- 		function timePlease (){
-
-		document.getElementById("start").onclick = function intervalCounter () {		
-			$("#start").hide();
-		
-			
-			var intervalId = setInterval(function () {
-				if (timer === 1) {
-				clearInterval(intervalId);
-					countW += 1;
-   					$("#wrongCount").html(countW);
-			}
-				timer-=1;
-				var html = document.getElementById('timer').innerHTML;
-
-				document.getElementById('timer').innerHTML =timer;
-			}, 1000);
-
-			populate(q1);
-			areYouRight(q1);
-
-	}
-	}
-timePlease();
-populate
+myStart();
+uRight()
 
 
-//inserts question and shuffles button answer choices randomly 
-	
-	function populate (quest){ 
-	ranNum("firstChoice", quest);
-	ranNum("secondChoice",quest);
- 	ranNum("thirdChoice",quest);
-	ranNum("fourthChoice",quest);
-	random =[0,1,2,3,4];
-};
-// populate(q2);
-//determines whether the correct answer was chosen and adds to the appr count
-function rightAnswer (choice, answers) {
-	$(choice).click(function(){
- 	if ($(choice).html()===(answers[1])){
- 		countR += 1;
-   		$("#rightCount").html(countR);
-   		alert("Nice!");
-   		timer = 30; 	
+ });
 
-   	} else{
-   	countW += 1;
-   	$("#wrongCount").html(countW);
-   	alert("Ouch! The correct answer was " + answers[1]);
-   	// stopTimer();
-   	timer = 30;
-   };
-   if(countW+countR===1)
-	{newQuestion(q2)}
-	else if(countW+countR===2) {
-	newQuestion(q3)}
-	else if(countW+countR===3) {
-	newQuestion(q4)};
-    
-
-
-});
-	
-};
-
-
-function areYouRight(ans){
-	rightAnswer("#firstChoice",ans);
-	rightAnswer("#secondChoice",ans);
-	rightAnswer("#thirdChoice",ans);
-	rightAnswer("#fourthChoice",ans);}
-
-function newQuestion(questionNum){
-	populate(questionNum);
-	areYouRight(questionNum);
-}
-
-
-
-   });
 
