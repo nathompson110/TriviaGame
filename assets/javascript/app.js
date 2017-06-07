@@ -89,7 +89,7 @@ function populate (varArray){
 };
 function uRight (){		 
  $(".btn-primary").click(function(){
- 	timer = 33; 
+ 	timer = 17; 
  	clickedAns = $(this).html()
  	if (clickedAns.indexOf(correctAns)>-1){
  		countR++;
