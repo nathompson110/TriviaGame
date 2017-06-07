@@ -36,11 +36,12 @@ function myTimer() {intervalId = setInterval(function () {
 		$("#timer").html(timer);
 		if (timer===-1) {
 			countW++;
-			timer = 17;
+			timer = 20;
 			$("#wrongCount").html(countW);		
 			$("#textAnswer").html("Time's up! The right answer is " + correctAns)
+   			$('#popup video').attr("src","assets/images/cindy.mp4");
    			$("#popup").show();
-   			setTimeout(function(){$("#popup").hide(); },2000);
+   			setTimeout(function(){$("#popup").hide(); },4000);
    			nextQuestion();
    		};
    		}, 1000);
@@ -57,14 +58,14 @@ function myTimer() {intervalId = setInterval(function () {
 		$("#start").show();
 		var total = (countR+countW);
 		setTimeout(function(){ $("#textAnswer").html("Game Over! Number Correct: " + countR + " out of " + total);
-   		
-   		$("#popup").show(); }, 2000);
+   		$('#popup video').attr("src","assets/images/blinking.mp4");
+   		$("#popup").show(); }, 4000);
 	};	
 	};	
 function myAlertFunction (innerhtmlmessage){
    		$("#textAnswer").html(innerhtmlmessage)
    		$("#popup").show();
-   		setTimeout(function(){$("#popup").hide(); },2000);
+   		setTimeout(function(){$("#popup").hide(); },4000);
 }			
 
 function stopTimer(){clearInterval(intervalId);}
@@ -89,14 +90,16 @@ function populate (varArray){
 };
 function uRight (){		 
  $(".btn-primary").click(function(){
- 	timer = 17; 
+ 	timer = 20; 
  	clickedAns = $(this).html()
  	if (clickedAns.indexOf(correctAns)>-1){
+ 		$('#popup video').attr("src","assets/images/happy.mp4");
  		countR++;
  		$("#rightCount").html(countR);
  		myAlertFunction("Great Job!")
  	} else {
  		countW++;
+ 		$('#popup video').attr("src","assets/images/cindy.mp4");
  		$("#wrongCount").html(countW);
  		myAlertFunction("UH OH! The right answer is " + correctAns)  		
  	};
