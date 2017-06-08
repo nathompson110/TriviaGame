@@ -12,9 +12,7 @@ var random =[0,1,2,3,4];
 var correctAns;
 var clickedAns;
 var myAlert;
-function generateImage(){
-	$('#generate').css('background-image','url(ajax-loader.gif)');
-}
+
 function myStart (){
 	$("#start").click(function(){
 
@@ -92,7 +90,7 @@ function populate (varArray){
 	ranNum("#secondChoice",varArray);
 	ranNum("#thirdChoice",varArray);
 	ranNum("#fourthChoice",varArray);
-	random =[0,1,2,3,4,5]
+	random =[0,1,2,3,4]
 };
 function uRight (){		 
  $(".btn-primary").click(function(){
