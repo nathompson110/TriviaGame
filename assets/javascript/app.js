@@ -113,7 +113,7 @@ function uRight (){
 };
 
 $(document).ready(function(){
-alert("Dear Bootcamp Grader, \n\n The first answer is \nAnastasia, jic you're not a Disney fan and want to see what correct does.")
+
 myStart();
 uRight()
 
